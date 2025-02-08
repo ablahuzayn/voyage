@@ -248,27 +248,33 @@
         }
 
         function getCurrentLocation() {
-            const locationDisplay = document.getElementById('location-display');
-            
-            if (navigator.geolocation) {
-                locationDisplay.innerHTML = 'Getting location...';
-                
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const { latitude, longitude } = position.coords;
-                        locationDisplay.innerHTML = `
-                            <p>Latitude: ${latitude}</p>
-                            <p>Longitude: ${longitude}</p>
-                        `;
-                    },
-                    (error) => {
-                        locationDisplay.innerHTML = `Error getting location: ${error.message}`;
-                    }
-                );
-            } else {
-                locationDisplay.innerHTML = 'Geolocation is not supported by your browser';
+    const locationDisplay = document.getElementById('location-display');
+
+    if (navigator.geolocation) {
+        locationDisplay.innerHTML = 'Getting location...';
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+
+                locationDisplay.innerHTML = `
+                    <p>Latitude: ${latitude}</p>
+                    <p>Longitude: ${longitude}</p>
+                    <p><a href="https://www.google.com/maps?q=${latitude},${longitude}" target="_blank">📍 View on Google Maps</a></p>
+                `;
+
+                // Automatically open Google Maps
+                window.open(`https://www.google.com/maps?q=${latitude},${longitude}`, '_blank');
+            },
+            (error) => {
+                locationDisplay.innerHTML = `Error getting location: ${error.message}`;
             }
-        }
+        );
+    } else {
+        locationDisplay.innerHTML = 'Geolocation is not supported by your browser';
+    }
+}
+
 
         window.onload = function() {
             initializeEmergencyContacts();
