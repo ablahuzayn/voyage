@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Previous head section remains the same -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voyage - Your Travel Companion</title>
+    <style>
+        /* All previous CSS remains the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #1e40af;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .destination-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-container {
+            flex: 1;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .swap-button {
+            background-color: #4b5563;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            align-self: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1e40af;
+        }
+
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .emergency-contact {
+            background-color: #f8fafc;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid #2563eb;
+            transition: transform 0.2s;
+        }
+
+        .emergency-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .emergency-contact a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .emergency-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .location-info {
+            margin-top: 1rem;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Voyage</h1>
+        <p>Your Travel Companion</p>
+    </div>
+
+    <div class="container">
+        <!-- Destination Form Section -->
+        <div class="card">
+            <div class="card-title">
+                📍 Plan Your Journey
+            </div>
+            <div class="destination-form">
+                <div class="input-container">
+                    <label class="input-label">From</label>
+                    <input type="text" id="from-location" placeholder="Enter starting location">
+                </div>
+                <button class="swap-button" onclick="swapLocations()">↕️</button>
+                <div class="input-container">
+                    <label class="input-label">To</label>
+                    <input type="text" id="to-location" placeholder="Enter destination">
+                </div>
+                <button onclick="planJourney()">Plan Journey</button>
+            </div>
+        </div>
+
+        <!-- Location Section -->
+        <div class="card">
+            <div class="card-title">
+                🗺️ Current Location
+            </div>
+            <button onclick="getCurrentLocation()">Get Current Location</button>
+            <div id="location-display" class="location-info"></div>
+        </div>
+
+        <!-- Emergency Contacts Section -->
+        <div class="card">
+            <div class="card-title">
+                ☎️ Emergency Contacts
+            </div>
+            <div class="emergency-grid" id="emergency-contacts"></div>
+        </div>
+    </div>
+
+    <script>
+        // Updated emergency contacts
+        const emergencyContacts = [
+            { name: 'Police', number: '100' },
+            { name: 'Fire', number: '101' },
+            { name: 'Women Helpline', number: '1091' },
+            { name: 'Pink Police', number: '1515' },
+            { name: 'Road Accident Emergency', number: '1073' }
+        ];
+
+        // Initialize emergency contacts
+        function initializeEmergencyContacts() {
+            const container = document.getElementById('emergency-contacts');
+            emergencyContacts.forEach((contact, index) => {
+                const div = document.createElement('div');
+                div.className = 'emergency-contact';
+                div.innerHTML = `
+                    <strong>${index + 1}. ${contact.name}:</strong><br>
+                    <a href="tel:${contact.number}">${contact.number}</a>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Swap locations function
+        function swapLocations() {
+            const fromLocation = document.getElementById('from-location');
+            const toLocation = document.getElementById('to-location');
+            const temp = fromLocation.value;
+            fromLocation.value = toLocation.value;
+            toLocation.value = temp;
+        }
+
+        // Handle journey planning
+        function planJourney() {
+            const fromLocation = document.getElementById('from-location').value;
+            const toLocation = document.getElementById('to-location').value;
+            
+            if (fromLocation && toLocation) {
+                alert(`Journey planned from ${fromLocation} to ${toLocation}`);
+            } else {
+                alert('Please enter both starting location and destination');
+            }
+        }
+
+        // Handle getting current location
+        function getCurrentLocation() {
+            const locationDisplay = document.getElementById('location-display');
+            
+            if (navigator.geolocation) {
+                locationDisplay.innerHTML = 'Getting location...';
+                
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        locationDisplay.innerHTML = `
+                            <p>Latitude: ${latitude}</p>
+                            <p>Longitude: ${longitude}</p>
+                        `;
+                    },
+                    (error) => {
+                        locationDisplay.innerHTML = `Error getting location: ${error.message}`;
+                    }
+                );
+            } else {
+                locationDisplay.innerHTML = 'Geolocation is not supported by your browser';
+            }
+        }
+
+        // Initialize the app
+        window.onload = function() {
+            initializeEmergencyContacts();
+        };
+    </script>
+</body>
+</html>
