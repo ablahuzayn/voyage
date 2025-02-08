@@ -1,57 +1,96 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Voyage - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .app-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-name">Voyage</div>
+    <div class="title">Find your travel mate</div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <a href="home.html"><button type="submit">LOG IN</button></a>
+        <p id="error-message" style="color: red; display: none;">Invalid username or password</p>
+    </div>
     <script>
-        function handleLogin(event) {
-            event.preventDefault(); // Prevent the default form submission
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var errorMessage = document.getElementById('error-message');
             
-            // Get input values
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-
-            // Simple validation
-            if (username === '' || password === '') {
-                alert('Please fill in both fields.');
+            if (!username || !password) {
+                errorMessage.textContent = "Please enter both username and password.";
+                errorMessage.style.display = "block";
                 return;
             }
-
-            // Redirect to the travel details page
-            window.location.href = "home.html";
+            
+            if (username === "admin" && password === "password") {
+                alert("Login successful!");
+                errorMessage.style.display = "none";
+            } else {
+                errorMessage.textContent = "Invalid username or password.";
+                errorMessage.style.display = "block";
+            }
         }
+        
+        document.getElementById('username').addEventListener('input', function() {
+            document.getElementById('error-message').style.display = "none";
+        });
+        
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('error-message').style.display = "none";
+        });
     </script>
-</head>
-<body class="bg-white flex items-center justify-center min-h-screen">
-    <div class="bg-white rounded-lg shadow-lg p-8 w-80 -mt-16">
-        <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
-        <form id="loginForm" onsubmit="handleLogin(event)">
-            <div class="mb-4">
-                <label for="username" class="sr-only">Username</label>
-                <div class="flex items-center bg-gray-100 rounded-lg p-2 focus-within:ring-2 focus-within:ring-orange-400">
-                    <i class="fas fa-user text-gray-400 mr-2"></i>
-                    <input type="text" id="username" name="username" placeholder="Username" class="bg-gray-100 outline-none w-full" required>
-                </div>
-            </div>
-            <div class="mb-4">
-                <label for="password" class="sr-only">Password</label>
-                <div class="flex items-center bg-gray-100 rounded-lg p-2 focus-within:ring-2 focus-within:ring-orange-400">
-                    <i class="fas fa-lock text-gray-400 mr-2"></i>
-                    <input type="password" id="password" name="password" placeholder="Password" class="bg-gray-100 outline-none w-full" required>
-                </div>
-            </div>
-            <a href="home.html"><button type="submit" class="w-full bg-gradient-to-r from-orange-400 to-pink-500 text-white py-2 rounded-lg font-bold hover:opacity-90 transition duration-200">LOG IN</button></a>
-            <div class="text-center mt-4">
-                <a href="#" class="text-gray-500 hover:text-gray-700 transition">Forgot Password?</a>
-            </div>
-        </form>
-        <div class="text-center mt-4">
-            <span class="text-gray-500">Not a member? </span>
-            <a href="#" class="text-blue-500 hover:underline">Sign up now</a>
-        </div>
-    </div>
 </body>
 </html>
-
