@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Previous head section remains the same -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voyage - Your Travel Companion</title>
     <style>
-        /* All previous CSS remains the same */
         * {
             margin: 0;
             padding: 0;
@@ -25,11 +23,31 @@
             text-align: center;
             padding: 2rem;
             margin-bottom: 2rem;
+            position: relative;
         }
 
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
+        }
+
+        .profile-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: white;
+            color: #2563eb;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .profile-button:hover {
+            background-color: #e0e7ff;
         }
 
         .container {
@@ -59,12 +77,6 @@
         .destination-form {
             display: grid;
             gap: 1rem;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
         }
 
         .input-container {
@@ -156,10 +168,10 @@
     <div class="header">
         <h1>Voyage</h1>
         <p>Your Travel Companion</p>
+        <button class="profile-button">Profile</button>
     </div>
 
     <div class="container">
-        <!-- Destination Form Section -->
         <div class="card">
             <div class="card-title">
                 📍 Plan Your Journey
@@ -178,7 +190,6 @@
             </div>
         </div>
 
-        <!-- Location Section -->
         <div class="card">
             <div class="card-title">
                 🗺️ Current Location
@@ -187,7 +198,6 @@
             <div id="location-display" class="location-info"></div>
         </div>
 
-        <!-- Emergency Contacts Section -->
         <div class="card">
             <div class="card-title">
                 ☎️ Emergency Contacts
@@ -197,7 +207,6 @@
     </div>
 
     <script>
-        // Updated emergency contacts
         const emergencyContacts = [
             { name: 'Police', number: '100' },
             { name: 'Fire', number: '101' },
@@ -206,7 +215,6 @@
             { name: 'Road Accident Emergency', number: '1073' }
         ];
 
-        // Initialize emergency contacts
         function initializeEmergencyContacts() {
             const container = document.getElementById('emergency-contacts');
             emergencyContacts.forEach((contact, index) => {
@@ -220,7 +228,6 @@
             });
         }
 
-        // Swap locations function
         function swapLocations() {
             const fromLocation = document.getElementById('from-location');
             const toLocation = document.getElementById('to-location');
@@ -229,7 +236,6 @@
             toLocation.value = temp;
         }
 
-        // Handle journey planning
         function planJourney() {
             const fromLocation = document.getElementById('from-location').value;
             const toLocation = document.getElementById('to-location').value;
@@ -241,7 +247,6 @@
             }
         }
 
-        // Handle getting current location
         function getCurrentLocation() {
             const locationDisplay = document.getElementById('location-display');
             
@@ -265,7 +270,6 @@
             }
         }
 
-        // Initialize the app
         window.onload = function() {
             initializeEmergencyContacts();
         };
