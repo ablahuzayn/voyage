@@ -64,6 +64,6 @@ open live server
 
 ## Team Contributions
 - [Abla Hussain]: [Created login page, ]
-- [Ananya S Anil]: [created home page]
+- [Ananya S Anil]: [created profile page]
 - [Amrirtha.s ]: [created home page]
 
