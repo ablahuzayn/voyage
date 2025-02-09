@@ -14,7 +14,7 @@
 [https://voyage-rose.vercel.app/]
 
 ### Project Description
- [Travel Partner is a user-friendly web platform designed to help travelers find a companion for their journeys. Whether you're commuting daily, planning a long trip, or exploring new destinations, this website connects you with like-minded travelers, ensuring a safer and more enjoyable experience]
+ ["Voyage" is a user-friendly web platform designed to help female travelers to find a companion for their journeys. Whether you're commuting daily, planning a long trip, or exploring new destinations, this website connects you with like-minded travelers, ensuring a safer and more enjoyable experience]
 
 
 ### The Problem statement
