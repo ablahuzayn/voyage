@@ -18,7 +18,7 @@
 
 
 ### The Problem statement
-[women ofen feel unsafe travelling alone due to concerns about personal security]
+[women often feel unsafe travelling alone due to concerns about personal security]
 
 ### The Solution
 [Users can search for travel partners based on their start and end locations, making trips more secure and enjoyable.users can plan their trip seamlessly.Users can fetch their current location using GPS and view it directly on Google Maps for navigation and sharing. the website includes a secure email/password login system to ensure only authorized users access the platform The feedback system allows users to share their travel stories and learn from others’ contact numbers, making it easy to connect instantly . Users can also access the emergency servive numbers.]
